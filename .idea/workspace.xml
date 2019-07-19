@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b1dc4523-e7c0-44ab-9e84-e2afa8e430dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/mvideo/flutter_mvideo_plugin/VideoPlayerView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/mvideo/flutter_mvideo_plugin/VideoPlayerView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/mvideo/flutter_mvideo_plugin_example/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/mvideo/flutter_mvideo_plugin_example/MainActivity.kt" afterDir="false" />
     </list>
@@ -27,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/flutter_mvideo_plugin.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+            <state relative-caret-position="20">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -179,7 +178,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31677523" />
       <window_info id="Captures" order="1" side_tool="true" />
@@ -191,7 +189,7 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.0490524" />
-      <window_info active="true" anchor="bottom" id="Run" order="1" visible="true" weight="0.3407155" />
+      <window_info active="true" anchor="bottom" id="Run" order="1" visible="true" weight="0.82282794" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.7410562" />
@@ -291,8 +289,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/flutter_mvideo_plugin.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+        <state relative-caret-position="20">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>

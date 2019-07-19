@@ -101,7 +101,7 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
         }.build(mVideo)
     mVideo.fullscreenButton.setOnClickListener {
       orientationUtils.resolveByClick()
-      mVideo.startWindowFullscreen(registrar.activity(), true, false)
+      mVideo.startWindowFullscreen(registrar.activity(), true, true)
 //      registrar.activity().window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //          WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
