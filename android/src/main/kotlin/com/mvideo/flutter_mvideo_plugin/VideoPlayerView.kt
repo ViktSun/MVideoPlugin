@@ -30,8 +30,14 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
   private val inflater: LayoutInflater = LayoutInflater.from(registrar.activity())
   private var mVideo = inflater.inflate(R.layout.m_video, null) as StandardGSYVideoPlayer
   private var methodChannel = MethodChannel(registrar.messenger(), "flutter_mvideo_plugin_$viewId")
+
   private lateinit var orientationUtils: OrientationUtils
+
   private lateinit var mVideoOptions: GSYVideoOptionBuilder
+
+  private var isPlay: Boolean = false
+  private var isPause: Boolean = false
+  private var isFullScreen:Boolean =false
 
   init {
     this.methodChannel.setMethodCallHandler(this)
@@ -61,8 +67,16 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     //初始化旋转
     orientationUtils = OrientationUtils(registrar.activity(), mVideo)
 
+    //是否旋转
+    mVideo.isRotateViewAuto = false
+
     //是否可以滑动调整
     mVideo.setIsTouchWiget(true)
+
+    //添加封面
+//    val imageView = ImageView(registrar.activity())
+//    Glide.with(registrar.activity()).load("").centerCrop().into(imageView)
+//    mVideo.thumbImageView = imageView
 
     //返回按钮是否可见
     mVideo.backButton.visibility = View.GONE
@@ -77,24 +91,26 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
         .setRotateViewAuto(false)
         .setLockLand(false)
         .setAutoFullWithSize(true)
-        .setShowFullAnimation(false)
+        .setShowFullAnimation(true)
         .setNeedLockFull(true)
         .setUrl(url)
         .setCacheWithPlay(true)
         .setVideoAllCallBack(KVideoCallBack(orientationUtils))
-        .setLockClickListener { view, lock ->
+        .setLockClickListener { _, lock ->
           orientationUtils.isEnable = !lock
         }.build(mVideo)
     mVideo.fullscreenButton.setOnClickListener {
       orientationUtils.resolveByClick()
-      mVideo.startWindowFullscreen(registrar.activity(), false, false)
+      mVideo.startWindowFullscreen(registrar.activity(), true, false)
+//      registrar.activity().window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//          WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
     mVideo.startPlayLogic()
   }
 
 }
 
-class KVideoCallBack(var orientationUtils: OrientationUtils) : GSYSampleCallBack() {
+class KVideoCallBack(private var orientationUtils: OrientationUtils) : GSYSampleCallBack() {
   override fun onPrepared(url: String?, vararg objects: Any?) {
     super.onPrepared(url, *objects)
     orientationUtils.isEnable = true
