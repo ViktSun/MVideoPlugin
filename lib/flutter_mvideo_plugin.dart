@@ -23,9 +23,25 @@ class MVideoPlayerController {
     _channel = MethodChannel("flutter_mvideo_plugin_$id");
   }
 
-  Future<void> loadUrl(String url) async {
+  ///暂停播放
+  void onPause() {
+    _channel.invokeListMethod('onPause');
+  }
+
+  ///继续播放
+  void onResume() {
+    _channel.invokeListMethod('onResume');
+  }
+
+  ///退出全屏
+  Future<bool> quitFullScreen() async {
+    return await _channel.invokeMethod<bool>('quitFullScreen');
+  }
+
+  ///传入视频地址
+  Future<void> loadUrl(String url, String cover) async {
     assert(url != null);
-    return _channel.invokeMethod('loadUrl', url);
+    return _channel.invokeMethod('loadUrl', {"videoUrl": url, "cover": cover});
   }
 }
 
@@ -42,7 +58,7 @@ class MVideoPlayer extends StatefulWidget {
       @required this.x,
       @required this.y,
       @required this.width,
-      @required this.height});
+      @required this.height,});
 
   @override
   _MVideoPlayerState createState() => _MVideoPlayerState();
@@ -57,36 +73,36 @@ class _MVideoPlayerState extends State<MVideoPlayer> {
     );
   }
 
-  initPlayerView(){
-    if(defaultTargetPlatform == TargetPlatform.android){
+  initPlayerView() {
+    if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
         viewType: 'flutter_mvideo_plugin',
         onPlatformViewCreated: onPlatformViewCreated,
-        creationParams: <String,dynamic>{
-          "x":widget.x,
-          "y":widget.y,
-          "width":widget.width,
-          "height":widget.height,
+        creationParams: <String, dynamic>{
+          "x": widget.x,
+          "y": widget.y,
+          "width": widget.width,
+          "height": widget.height,
         },
         creationParamsCodec: const StandardMessageCodec(),
       );
-    }else{
+    } else {
       return UiKitView(
         viewType: 'flutter_mvideo_plugin',
         onPlatformViewCreated: onPlatformViewCreated,
-        creationParams: <String,dynamic>{
-          "x":widget.x,
-          "y":widget.y,
-          "width":widget.width,
-          "height":widget.height,
+        creationParams: <String, dynamic>{
+          "x": widget.x,
+          "y": widget.y,
+          "width": widget.width,
+          "height": widget.height,
         },
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
   }
 
-  Future<void> onPlatformViewCreated(id) async{
-    if(widget.onCreated==null){
+  Future<void> onPlatformViewCreated(int id) async {
+    if (widget.onCreated == null) {
       return;
     }
     widget.onCreated(MVideoPlayerController.init(id));
