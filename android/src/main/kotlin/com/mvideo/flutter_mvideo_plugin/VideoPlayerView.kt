@@ -102,14 +102,6 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     val  imageView= ImageView(registrar.activity())
     imageView.scaleType = ImageView.ScaleType.FIT_XY
     Glide.with(registrar.activity()).load(cover).into(imageView)
-//    imageView.displayImage(cover)
-//    Toast.makeText(registrar.activity(),cover,0).show()
-//    val imageView = ImageView(registrar.activity())
-//    Glide.with(registrar.context()).load(cover).into(imageView)
-
-//    Log.d("图片地址",cover)
-//    imageView.setImageResource(R.drawable.exo_icon_vr)
-//    mVideo.thumbImageView = imageView
 
     //返回按钮是否可见
     mVideo.backButton.visibility = View.GONE
