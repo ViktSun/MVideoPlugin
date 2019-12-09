@@ -1,7 +1,17 @@
+# Miscellaneous
+*.class
+*.lock
+*.log
+*.pyc
+*.swp
 .DS_Store
-.dart_tool/
+.atom/
+.buildlog/
+.history
+.svn/
 
-.packages
-.pub/
-
-build/
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
