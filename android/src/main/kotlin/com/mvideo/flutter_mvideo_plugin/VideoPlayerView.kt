@@ -1,12 +1,10 @@
 package com.kvideo.flutter_kvideo_plugin
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.mvideo.flutter_mvideo_plugin.R
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
@@ -33,8 +31,8 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     private var registrar: PluginRegistry.Registrar) : PlatformView, MethodChannel.MethodCallHandler {
 
   private val inflater: LayoutInflater = LayoutInflater.from(registrar.activity())
-  @SuppressLint("InflateParams")
-  private val mVideo = inflater.inflate(R.layout.m_video, null) as StandardGSYVideoPlayer
+  private val mVideo = StandardGSYVideoPlayer(registrar.activity())
+//  private val mVideo = inflater.inflate(R.layout.m_video, null,true) as StandardGSYVideoPlayer
   private var methodChannel = MethodChannel(registrar.messenger(), "flutter_mvideo_plugin_$viewId")
 
   private lateinit var orientationUtils: OrientationUtils
@@ -66,7 +64,7 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
         mVideo.currentPlayer.onVideoPause()
       }
       "onResume" ->{
-        mVideo.currentPlayer.onVideoResume(true)
+        mVideo.currentPlayer.onVideoResume(false)
       }
 
       ///退出全屏
@@ -92,6 +90,8 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     //初始化旋转
     orientationUtils = OrientationUtils(registrar.activity(), mVideo)
 
+    orientationUtils.isEnable =false
+
     //是否旋转
     mVideo.isRotateViewAuto = false
 
@@ -106,7 +106,7 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     //返回按钮是否可见
     mVideo.backButton.visibility = View.GONE
 
-    //处事换不打开外部旋转
+    //初始化不打开外部旋转
     mVideo.isEnabled = false
 
     //播放器的参数设置
@@ -117,7 +117,7 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
         .setRotateViewAuto(false)
         .setLockLand(false)
         .setAutoFullWithSize(true)
-        .setShowFullAnimation(true)
+        .setShowFullAnimation(false)
         .setNeedLockFull(true)
         .setUrl(url)
         .setCacheWithPlay(true)
@@ -129,7 +129,7 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
           //加载完成
           override fun onPrepared(url: String?, vararg objects: Any?) {
             super.onPrepared(url, *objects)
-            orientationUtils.isEnable = true
+            orientationUtils.isEnable = false
             isPlay = true
           }
 
@@ -145,7 +145,6 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     mVideo.fullscreenButton.setOnClickListener {
       orientationUtils.resolveByClick()
       mVideo.startWindowFullscreen(registrar.activity(), true, true)
-
     }
     mVideo.startPlayLogic()
   }

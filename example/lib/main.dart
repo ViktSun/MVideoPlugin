@@ -72,6 +72,7 @@ class _MyAppState extends State<MyApp> {
 
   void _onPlayerViewCreate(viewPlayerController) {
     this.viewPlayerController = viewPlayerController;
-    this.viewPlayerController.loadUrl("http://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4");
+    this.viewPlayerController.loadUrl("http://baobab.kaiyanapp"
+        ".com/api/v1/playUrl?vid=179506&resourceType=video&editionType=default&source=aliyun&playUrlType=url_oss","http://img.kaiyanapp.com/579ccf17076de3c9b029587ea217dd6c.png?imageMogr2/quality/60/format/jp");
   }
 }
