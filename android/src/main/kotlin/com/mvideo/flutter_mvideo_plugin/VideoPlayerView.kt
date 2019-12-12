@@ -1,10 +1,9 @@
 package com.kvideo.flutter_kvideo_plugin
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import com.bumptech.glide.Glide
+import coil.api.load
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
@@ -30,9 +29,9 @@ import io.flutter.plugin.platform.PlatformView
 class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     private var registrar: PluginRegistry.Registrar) : PlatformView, MethodChannel.MethodCallHandler {
 
-  private val inflater: LayoutInflater = LayoutInflater.from(registrar.activity())
-  private val mVideo = StandardGSYVideoPlayer(registrar.activity())
-//  private val mVideo = inflater.inflate(R.layout.m_video, null,true) as StandardGSYVideoPlayer
+//  private val inflater: LayoutInflater = LayoutInflater.from(registrar.activity())
+  private val mVideo:StandardGSYVideoPlayer = StandardGSYVideoPlayer(registrar.activity())
+//  private val mVideo = inflater.inflate(R.layout.m_video, null) as StandardGSYVideoPlayer
   private var methodChannel = MethodChannel(registrar.messenger(), "flutter_mvideo_plugin_$viewId")
 
   private lateinit var orientationUtils: OrientationUtils
@@ -101,7 +100,8 @@ class VideoPlayerView(var context: Context?, var viewId: Int, var args: Any?,
     //添加封面
     val  imageView= ImageView(registrar.activity())
     imageView.scaleType = ImageView.ScaleType.FIT_XY
-    Glide.with(registrar.activity()).load(cover).into(imageView)
+    imageView.load(cover)
+//    Glide.with(registrar.activity()).load(cover).into(imageView)
 
     //返回按钮是否可见
     mVideo.backButton.visibility = View.GONE
