@@ -53,6 +53,6 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.shuyu:GSYVideoPlayer:7.1.1'
+    implementation 'com.shuyu:GSYVideoPlayer:7.1.2'
     implementation("io.coil-kt:coil:0.8.0")
 }
